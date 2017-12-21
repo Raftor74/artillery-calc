@@ -86,6 +86,7 @@ function reloadRangeField() {
     $('#temperature-correction').val(0);
     $('#pressure-correction').val(0);
     $('#wind-correction').val(0);
+    $('#result-scope').val(0);
     closeAlert();
 }
 
