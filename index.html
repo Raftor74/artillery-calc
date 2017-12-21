@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
             <div class="form-wrapper">
-            <h1 class="text-center">Артиллерийский калькулятор (v 1.0)</h1>
+            <h1 class="text-center">Артиллерийский калькулятор (v 1.1)</h1>
                 <form role="form" class="artillery-form">
                     <div class="form-section">
                         <div class="form-group">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="wind-correction">Поправка на ветер</label>
-                                    <input type="text" class="form-control clear-if-zero" id="wind-correction" value="0">
+                                    <input type="text" class="form-control clear-if-zero" id="wind-correction" value="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -91,10 +91,10 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="original-scope">Прицел</label>
-                                    <input type="text" class="form-control clear-if-zero" id="original-scope" value="0">
+                                    <input type="text" class="form-control clear-if-zero" id="original-scope"  value="0" readonly>
                                 </div>
                             </div>
-                            </br>
+                            <br>
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label for="target-height">Высота цели (m)</label>
@@ -106,10 +106,10 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="height-correction">Поправка на высоту</label>
-                                    <input type="text" class="form-control clear-if-zero" id="height-correction" value="0">
+                                    <input type="text" class="form-control clear-if-zero" id="height-correction" value="0" readonly>
                                 </div>
                             </div>
-                            </br>
+                            <br>
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label for="temperature">Температура</label>
@@ -121,14 +121,14 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="temperature-correction">Поправка на темпер.</label>
-                                    <input type="text" class="form-control clear-if-zero" id="temperature-correction" value="0">
+                                    <input type="text" class="form-control clear-if-zero" id="temperature-correction" value="0" readonly>
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="pressure-correction">Поправка на давление</label>
-                                    <input type="text" class="form-control clear-if-zero" id="pressure-correction" value="0">
+                                    <input type="text" class="form-control clear-if-zero" id="pressure-correction" value="0" readonly>
                                 </div>
                             </div>
-                            </br>
+                            <br>
                             <div class="row">
                                 <div class="col-xs-4 col-xs-offset-3">
                                     <label for="result-scope">Итоговый прицел</label>
@@ -141,6 +141,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="alert alert-danger" id="error-message-block" hidden>
+                        <button type="button" id="close-alert" class="close" aria-hidden="true">&times;</button>
+                        <strong>Ошибка! </strong><span id="error-text">Better check yourself, you're not looking too good.</span>
+                    </div>
                 </form>
             </div>
         </div>
@@ -149,5 +153,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/table.js"></script>
 </body>
 </html>

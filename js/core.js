@@ -1,3 +1,4 @@
+//Типы снарядов
 let ammoType = {
     "2b14": {
         "main":"Основной",
@@ -32,13 +33,29 @@ $(document).ready(function(){
         let cannonType = $(this).val();
         loadAmmoType(cannonType);
     });
-    
+
+    $('#close-alert').click(function(){
+        $('#error-text').empty();
+        $('#error-message-block').hide();
+    });
+
     $('#result-сalc').click(function () {
-        calculateScope();
+        let data = calculateScope();
+        if (data)
+            $('#result-scope').val(data);
+        else
+            displayError("Выбран неподходящий тип снаряда");
         return false;
     });
 
 });
+
+function displayError(text){
+    let errorObj = $('#error-message-block');
+    let errorText = $('#error-text');
+    errorText.html(text);
+    errorObj.show();
+}
 
 //Загружает типы снарядов для орудий
 function loadAmmoType(cannonType) {
@@ -75,6 +92,10 @@ function calculateScope() {
     let temp_correction = $('#temperature-correction').val();
     //Поправка на давление
     let pressure_correction = $('#pressure-correction').val();
+    //Тип орудия
+    let cannon_type = $('#cannon-type').val();
+    //Тип снаряда
+    let ammo_type = $('#ammo-type').val();
 
     distance = parseInt(distance);
     scope = parseInt(scope);
@@ -86,9 +107,49 @@ function calculateScope() {
     temp_correction = parseFloat(temp_correction);
     pressure_correction = parseFloat(pressure_correction);
 
+    //Получаем табличные значения по дальности
+    let table_values = findNearestRangeValue(cannon_type, ammo_type, distance);
+
+    //Поправка на ветер
+    let wind_correction = parseFloat($('#wind-correction').val());
+
+    //Если значения полученны выводим их
+    if (table_values)
+        table_values = reformatArray(table_values);
+    else
+        return false;
+
+    if (!wind_correction){
+        wind_correction = parseFloat(table_values["wind_correction"]);
+        $('#wind-correction').val(wind_correction);
+    }
+
+    if (!scope){
+        scope = parseInt(table_values["scope"]);
+        $('#original-scope').val(scope);
+    }
+
+    if(!height_correction){
+        height_correction = parseFloat(table_values["elev_correction"]);
+        $('#height-correction').val(height_correction);
+    }
+
+    if(!temp_correction){
+        temp_correction = parseFloat(table_values["temp_correction"]);
+        $('#temperature-correction').val(temp_correction);
+    }
+
+    if(!pressure_correction){
+        pressure_correction = parseFloat(table_values["pressure_correction"]);
+        $('#pressure-correction').val(pressure_correction);
+    }
+
+
     let result = scope + Math.round((target_height - cannon_height) / 100 * height_correction);
-    result += Math.round((15 - temperature) * temp_correction) + Math.round((pressure - 1013)*pressure_correction);
-    $('#result-scope').val(result);
+    result += Math.round((15 - temperature) * temp_correction);
+    if (pressure)
+        result += + Math.round((pressure - 1013)*pressure_correction);
+    return result;
 }
 
 //Рассчитывает значение угломера
@@ -121,5 +182,4 @@ function calculate_angle() {
     result = result + (target_angle - focus_angle) + wind_result;
 
     $('#result-angle').val(result);
-
 }
