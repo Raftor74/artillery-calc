@@ -217,8 +217,8 @@ function calculate_angle() {
     }
 
     let wind_result = ((wind_speed / 4) * wind_correction) * wind_arrow;
-
     result = result + (target_angle - focus_angle) + wind_result;
+    result = Math.round(result);
 
     return result;
 }
