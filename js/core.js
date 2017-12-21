@@ -70,7 +70,6 @@ function reloadAngleField() {
     $('#invert-target-angle').prop('checked',false);
     $('#invert-focus-angle').prop('checked', false);
     $('#wind-speed').val(0);
-    $('#wind-arrow').val(0);
     $('#result-angle').val(0);
 }
 
@@ -81,8 +80,6 @@ function reloadRangeField() {
     $('#target-height').val(0);
     $('#cannon-height').val(0);
     $('#height-correction').val(0);
-    $('#temperature').val(0);
-    $('#pressure').val(0);
     $('#temperature-correction').val(0);
     $('#pressure-correction').val(0);
     $('#wind-correction').val(0);
