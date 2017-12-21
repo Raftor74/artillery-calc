@@ -20,3 +20,8 @@
 #error-message-block{
     margin-top: 10px;
 }
+
+#reset , #result-сalc, #calculate-angle, #reset-angle{
+    width: 100%;
+}
+

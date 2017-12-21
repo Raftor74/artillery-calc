@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label for="target-angle">Угол на цель</label>
-                                    <input type="text" class="form-control" id="target-angle">
+                                    <input type="text" class="form-control" id="target-angle" value="0">
                                     <div class="checkbox">
                                         <label>
                                             <input id="invert-target-angle" type="checkbox">Перевести из 6400
@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="focus-angle">Угол на точку наводки</label>
-                                    <input type="text" class="form-control" id="focus-angle">
+                                    <input type="text" class="form-control" id="focus-angle" value="0">
                                     <div class="checkbox">
                                         <label>
                                             <input id="invert-focus-angle" type="checkbox">Перевести из 6400
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="result-angle">Итоговый угломер</label>
-                                    <input type="text" class="form-control" id="result-angle" readonly>
+                                    <input type="text" class="form-control" id="result-angle" value="0" readonly>
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="calculate-angle">Рассчитать</label>
@@ -65,6 +65,10 @@
                                     <label for="wind-correction">Поправка на ветер</label>
                                     <input type="text" class="form-control clear-if-zero" id="wind-correction" value="0" readonly>
                                 </div>
+                                <div class="col-xs-3">
+                                    <label for="reset-angle">Очистить значения</label>
+                                    <button id="reset-angle" class="btn btn-info">Сброс</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,9 +80,6 @@
                                     <label for="cannon-type">Тип орудия</label>
                                     <select id="cannon-type" class="form-control">
                                         <option value="2b14">Миномёт 2Б14</option>
-                                        <option value="d30">Д-30</option>
-                                        <option value="2c3">САУ "Акация"</option>
-                                        <option value="bm21">БМ21 "Град"</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-3">
@@ -130,13 +131,17 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-xs-4 col-xs-offset-3">
+                                <div class="col-xs-4 col-xs-offset-2">
                                     <label for="result-scope">Итоговый прицел</label>
                                     <input type="text" class="form-control" id="result-scope" readonly>
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="result-сalc">Рассчитать</label>
                                     <button id="result-сalc" class="btn btn-primary">Рассчитать</button>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="reset">Очистить значения</label>
+                                    <button id="reset" class="btn btn-info">Сброс</button>
                                 </div>
                             </div>
                         </div>

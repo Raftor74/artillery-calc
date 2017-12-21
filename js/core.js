@@ -6,10 +6,7 @@ let ammoType = {
         "second":"2-й",
         "third":"3-й",
         "long":"Дальнобойный"
-    },
-    "d30":0,
-    "2c3":0,
-    "bm21":0
+    }
 };
 
 $(document).ready(function(){
@@ -35,8 +32,7 @@ $(document).ready(function(){
     });
 
     $('#close-alert').click(function(){
-        $('#error-text').empty();
-        $('#error-message-block').hide();
+        closeAlert();
     });
 
     $('#result-сalc').click(function () {
@@ -48,7 +44,48 @@ $(document).ready(function(){
         return false;
     });
 
+    $('#reset').click(function () {
+        reloadRangeField();
+        return false;
+    });
+
+    $('#reset-angle').click(function () {
+        reloadAngleField();
+        return false;
+    });
+
 });
+
+function closeAlert() {
+    $('#error-text').empty();
+    $('#error-message-block').hide();
+}
+
+//Очищает все поля формы угломера
+function reloadAngleField() {
+    $('#wind-correction').val(0);
+    $('#target-angle').val(0);
+    $('#focus-angle').val(0);
+    $('#invert-target-angle').prop('checked',false);
+    $('#invert-focus-angle').prop('checked', false);
+    $('#wind-speed').val(0);
+    $('#wind-arrow').val(0);
+}
+
+//Очищает все поля формы дальности
+function reloadRangeField() {
+    $('#target-distance').val(0);
+    $('#original-scope').val(0);
+    $('#target-height').val(0);
+    $('#cannon-height').val(0);
+    $('#height-correction').val(0);
+    $('#temperature').val(0);
+    $('#pressure').val(0);
+    $('#temperature-correction').val(0);
+    $('#pressure-correction').val(0);
+    $('#wind-correction').val(0);
+    closeAlert();
+}
 
 function displayError(text){
     let errorObj = $('#error-message-block');
