@@ -12,7 +12,8 @@ let ammoType = {
 $(document).ready(function(){
 
     $('#calculate-angle').click(function(){
-        calculate_angle();
+        let data = calculate_angle();
+        $('#result-angle').val(data);
         return false;
     });
 
@@ -70,6 +71,7 @@ function reloadAngleField() {
     $('#invert-focus-angle').prop('checked', false);
     $('#wind-speed').val(0);
     $('#wind-arrow').val(0);
+    $('#result-angle').val(0);
 }
 
 //Очищает все поля формы дальности
@@ -218,5 +220,5 @@ function calculate_angle() {
 
     result = result + (target_angle - focus_angle) + wind_result;
 
-    $('#result-angle').val(result);
+    return result;
 }
