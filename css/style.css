@@ -1,0 +1,18 @@
+.form-wrapper {
+    margin-top: 15%;
+    position: relative;
+    padding: 15px 15px 15px;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+}
+
+.form-section {
+    padding: 5px 5px;
+    border-bottom: 1px solid #ddd;
+}

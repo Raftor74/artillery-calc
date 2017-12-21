@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Артиллерийский калькулятор</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+            <div class="form-wrapper">
+            <h1 class="text-center">Артиллерийский калькулятор</h1>
+                <form role="form" class="artillery-form">
+                    <div class="form-section">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="target-angle">Угол на цель</label>
+                                    <input type="text" class="form-control" id="target-angle">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="invert-target-angle" type="checkbox">Перевести из 6400
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="focus-angle">Угол на точку наводки</label>
+                                    <input type="text" class="form-control" id="focus-angle">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="invert-focus-angle" type="checkbox">Перевести из 6400
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="result-angle">Итоговый угломер</label>
+                                    <input type="text" class="form-control" id="result-angle" readonly>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="calculate-angle">Рассчитать</label>
+                                    <button id="calculate-angle" class="btn btn-primary">Рассчитать</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="wind-speed">Ветер (м/с)</label>
+                                    <input type="text" class="form-control clear-if-zero" id="wind-speed" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="wind-arrow">Направление ветра</label>
+                                    <select id="wind-arrow" class="form-control">
+                                        <option value="0">Северный</option>
+                                        <option value="0.5">Северо-Западный</option>
+                                        <option value="1">Западный</option>
+                                        <option value="0.5">Юго-Западный</option>
+                                        <option value="0">Южный</option>
+                                        <option value="0.5">Юго-Восточный</option>
+                                        <option value="1">Восточный</option>
+                                        <option value="0.5">Северо-Восточный</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="wind-correction">Поправка на ветер</label>
+                                    <input type="text" class="form-control clear-if-zero" id="wind-correction" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="form-section">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="cannon-type">Тип орудия</label>
+                                    <select id="cannon-type" class="form-control">
+                                        <option value="2b14">Миномёт 2Б14</option>
+                                        <option value="d30">Д-30</option>
+                                        <option value="2c3">САУ "Акация"</option>
+                                        <option value="bm21">БМ21 "Град"</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="ammo-type">Тип снаряда</label>
+                                    <select id="ammo-type" class="form-control"></select>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="target-distance">Дистанция до цели</label>
+                                    <input type="text" class="form-control clear-if-zero" id="target-distance" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="original-scope">Прицел</label>
+                                    <input type="text" class="form-control clear-if-zero" id="original-scope" value="0">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="target-height">Высота цели (m)</label>
+                                    <input type="text" class="form-control clear-if-zero" id="target-height" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="cannon-height">Высота орудия (m)</label>
+                                    <input type="text" class="form-control clear-if-zero" id="cannon-height" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="height-correction">Поправка на высоту</label>
+                                    <input type="text" class="form-control clear-if-zero" id="height-correction" value="0">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="temperature">Температура</label>
+                                    <input type="text" class="form-control clear-if-zero" id="temperature" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="pressure">Давление</label>
+                                    <input type="text" class="form-control clear-if-zero" id="pressure" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="temperature-correction">Поправка на темпер.</label>
+                                    <input type="text" class="form-control clear-if-zero" id="temperature-correction" value="0">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="pressure-correction">Поправка на давление</label>
+                                    <input type="text" class="form-control clear-if-zero" id="pressure-correction" value="0">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-xs-4 col-xs-offset-3">
+                                    <label for="result-scope">Итоговый прицел</label>
+                                    <input type="text" class="form-control" id="result-scope" readonly>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label for="result-сalc">Рассчитать</label>
+                                    <button id="result-сalc" class="btn btn-primary">Рассчитать</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+</body>
+</html>
