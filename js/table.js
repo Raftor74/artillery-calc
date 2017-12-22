@@ -263,6 +263,8 @@ function get2C3Tables(ammo_name) {
         "single2":single2,
         "single3":single3
     };
+
+    return array[ammo_name];
 }
 
 function getD30Tables(ammo_name){
