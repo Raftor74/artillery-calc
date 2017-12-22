@@ -6,6 +6,9 @@ let ammoType = {
         "second":"2-й",
         "third":"3-й",
         "long":"Дальнобойный"
+    },
+    "d30":{
+        "full": "Полный"
     }
 };
 
@@ -17,9 +20,8 @@ $(document).ready(function(){
         return false;
     });
 
-    $('.clear-if-zero').click(function () {
-        let object = $(this);
-        object.val("");
+    $('.selectable').focus(function () {
+        $(this).select();
     });
 
     $('#ammo-type').ready(function () {
@@ -37,6 +39,7 @@ $(document).ready(function(){
     });
 
     $('#result-сalc').click(function () {
+        closeAlert();
         let data = calculateScope();
         if (data)
             $('#result-scope').val(data);
@@ -113,42 +116,27 @@ function loadAmmoType(cannonType) {
 function calculateScope() {
     //Дистанция до цели
     let distance = $('#target-distance').val();
-    //Исходный прицел
-    let scope = $('#original-scope').val();
     //Высота цели
     let target_height = $('#target-height').val();
     //Высота орудия
     let cannon_height = $('#cannon-height').val();
-    //Поправка на высоту
-    let height_correction = $('#height-correction').val();
     //Температура
     let temperature = $('#temperature').val();
     //Давление
     let pressure = $('#pressure').val();
-    //Поправка на температуру
-    let temp_correction = $('#temperature-correction').val();
-    //Поправка на давление
-    let pressure_correction = $('#pressure-correction').val();
     //Тип орудия
     let cannon_type = $('#cannon-type').val();
     //Тип снаряда
     let ammo_type = $('#ammo-type').val();
 
     distance = parseInt(distance);
-    scope = parseInt(scope);
     target_height = parseInt(target_height);
     cannon_height = parseInt(cannon_height);
-    height_correction = parseFloat(height_correction);
     temperature = parseFloat(temperature);
     pressure = parseFloat(pressure);
-    temp_correction = parseFloat(temp_correction);
-    pressure_correction = parseFloat(pressure_correction);
 
     //Получаем табличные значения по дальности
     let table_values = findNearestRangeValue(cannon_type, ammo_type, distance);
-
-    //Поправка на ветер
-    let wind_correction = parseFloat($('#wind-correction').val());
 
     //Если значения полученны выводим их
     if (table_values)
@@ -156,36 +144,30 @@ function calculateScope() {
     else
         return false;
 
-    if (!wind_correction){
-        wind_correction = parseFloat(table_values["wind_correction"]);
-        $('#wind-correction').val(wind_correction);
-    }
+    //Табличная поправка на ветер
+    let wind_correction = parseFloat(table_values["wind_correction"]);
+    $('#wind-correction').val(wind_correction);
+    //Табличный прицел
+    let scope = parseInt(table_values["scope"]);
+    $('#original-scope').val(scope);
+    //Табличная поправка на высоту
+    let height_correction = parseFloat(table_values["elev_correction"]);
+    $('#height-correction').val(height_correction);
+    //Табличная поправка на температуру
+    let temp_correction = parseFloat(table_values["temp_correction"]);
+    $('#temperature-correction').val(temp_correction);
+    //Табличная поправка на давление
+    let pressure_correction = parseFloat(table_values["pressure_correction"]);
+    $('#pressure-correction').val(pressure_correction);
 
-    if (!scope){
-        scope = parseInt(table_values["scope"]);
-        $('#original-scope').val(scope);
-    }
-
-    if(!height_correction){
-        height_correction = parseFloat(table_values["elev_correction"]);
-        $('#height-correction').val(height_correction);
-    }
-
-    if(!temp_correction){
-        temp_correction = parseFloat(table_values["temp_correction"]);
-        $('#temperature-correction').val(temp_correction);
-    }
-
-    if(!pressure_correction){
-        pressure_correction = parseFloat(table_values["pressure_correction"]);
-        $('#pressure-correction').val(pressure_correction);
-    }
-
-
+    //Считаем прицел с учётом поправки на высоты
     let result = scope + Math.round((target_height - cannon_height) / 100 * height_correction);
+    //Считаем прицел с учётом поправки на температуру
     result += Math.round((15 - temperature) * temp_correction);
+    //Считаем прицел с учётом поправки на давление
     if (pressure)
         result += + Math.round((pressure - 1013)*pressure_correction);
+
     return result;
 }
 
