@@ -7,8 +7,13 @@ let ammoType = {
         "third":"3-й",
         "long":"Дальнобойный"
     },
-    "d30":{
+    "d30": {
         "full": "Полный"
+    },
+    "2c3": {
+        "single1" : "Single 1",
+        "single2" : "Single 2",
+        "single3" : "Single 3",
     }
 };
 
