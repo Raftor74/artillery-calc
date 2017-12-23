@@ -14,13 +14,45 @@ let indexes = {
     "air_destiny_2": 11,
 };
 
-function getMean(arr1, arr2) {
+
+//Метод половинного деления
+function getMean(arr1, arr2, range) {
+    let new_range = [];
+    let epsilon = 5;
+    let up_edge = arr1;
+    let down_edge = arr2;
+    let closet_dist = 999999;
     let array = [];
-    for (let i = 0; i<arr1.length; i++)
+    let counter = 0;
+    while (Math.abs(closet_dist - range) > epsilon)
     {
-        let item = (parseFloat(arr1[i]) + parseFloat(arr2[i])) / 2;
-        array.push(item);
+        if (counter > 1000)
+            break;
+        new_range = [];
+        for (let i = 0; i < up_edge.length; i++)
+        {
+            let item = ((parseFloat(up_edge[i]) + parseFloat(down_edge[i])) / 2).toFixed(2);
+            new_range.push(item);
+        }
+
+        let diff1 = Math.abs(Math.round(up_edge[indexes["distance"]] - range));
+        let diff2 = Math.abs(Math.round(down_edge[indexes["distance"]] - range));
+
+        if (diff1 < diff2)
+            down_edge = new_range;
+
+        if (diff1 > diff2)
+            up_edge = new_range;
+
+        if (diff1 === diff2)
+            break;
+
+        closet_dist = Math.round(new_range[indexes["distance"]]);
+        counter++;
     }
+
+    array = new_range;
+
     return array;
 }
 
@@ -94,7 +126,7 @@ function findNearestRangeValue(cannon_type, ammo_name, range) {
             return range_array[i];
 
         if (y0 < range && range < y1) {
-            return getMean(range_array[i - 1], range_array[i]);
+            return getMean(range_array[i - 1], range_array[i], range);
         }
 
         y0 = y1;
