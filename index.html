@@ -50,11 +50,11 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="wind-arrow">Направление ветра</label>
-                                    <select id="wind-arrow" class="form-control">
-                                        <option value="0">Северный</option>
-                                        <option value="0.5">Северо-Западный</option>
-                                        <option value="1">Западный</option>
-                                        <option value="0.5">Юго-Западный</option>
+                                    <select id="wind-arrow" autocomplete="off" class="form-control">
+                                        <option value="0" selected="selected">Северный</option>
+                                        <option value="-0.5">Северо-Западный</option>
+                                        <option value="-1">Западный</option>
+                                        <option value="-0.5">Юго-Западный</option>
                                         <option value="0">Южный</option>
                                         <option value="0.5">Юго-Восточный</option>
                                         <option value="1">Восточный</option>
@@ -89,16 +89,20 @@
                                     <select id="ammo-type" class="form-control selectable"></select>
                                 </div>
                                 <div class="col-xs-3">
-                                    <label for="target-distance">Дистанция до цели</label>
-                                    <input type="text" class="form-control selectable" id="target-distance" value="0">
+                                    <label for="min-ammo-range">Мин. дальность (m)</label>
+                                    <input type="text" class="form-control selectable" tabindex="-1" id="min-ammo-range" value="0" readonly>
                                 </div>
                                 <div class="col-xs-3">
-                                    <label for="original-scope">Прицел</label>
-                                    <input type="text" class="form-control selectable" id="original-scope"  value="0" readonly>
+                                    <label for="max-ammo-range">Макс. дальность (m)</label>
+                                    <input type="text" class="form-control selectable" tabindex="-1" id="max-ammo-range"  value="0" readonly>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
+                                <div class="col-xs-2">
+                                    <label for="target-distance">Дистанция</label>
+                                    <input type="text" class="form-control selectable" id="target-distance" value="0">
+                                </div>
                                 <div class="col-xs-3">
                                     <label for="target-height">Высота цели (m)</label>
                                     <input type="text" class="form-control selectable" id="target-height" value="0">
@@ -107,20 +111,24 @@
                                     <label for="cannon-height">Высота орудия (m)</label>
                                     <input type="text" class="form-control selectable" id="cannon-height" value="0">
                                 </div>
-                                <div class="col-xs-3">
-                                    <label for="height-correction">Поправка на высоту</label>
-                                    <input type="text" class="form-control selectable" id="height-correction" value="0" readonly>
+                                <div class="col-xs-2">
+                                    <label for="temperature">Температура</label>
+                                    <input type="text" class="form-control selectable" id="temperature" value="0">
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="pressure">Давление</label>
+                                    <input type="text" class="form-control selectable" id="pressure" value="0">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <label for="temperature">Температура</label>
-                                    <input type="text" class="form-control selectable" id="temperature" value="0">
+                                    <label for="original-scope">Прицел</label>
+                                    <input type="text" class="form-control selectable" id="original-scope"  value="0" readonly>
                                 </div>
                                 <div class="col-xs-3">
-                                    <label for="pressure">Давление</label>
-                                    <input type="text" class="form-control selectable" id="pressure" value="0">
+                                    <label for="height-correction">Поправка на высоту</label>
+                                    <input type="text" class="form-control selectable" id="height-correction" value="0" readonly>
                                 </div>
                                 <div class="col-xs-3">
                                     <label for="temperature-correction">Поправка на темпер.</label>
@@ -133,11 +141,11 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-xs-4 col-xs-offset-2">
+                                <div class="col-xs-3">
                                     <label for="result-scope">Итоговый прицел</label>
                                     <input type="text" class="form-control selectable" id="result-scope" readonly>
                                 </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-3 col-xs-offset-3">
                                     <label for="result-сalc">Рассчитать</label>
                                     <button id="result-сalc" class="btn btn-primary">Рассчитать</button>
                                 </div>

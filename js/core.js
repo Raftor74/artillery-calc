@@ -8,7 +8,13 @@ let ammoType = {
         "long":"Дальнобойный"
     },
     "d30": {
-        "full": "Полный"
+        "fourth": "4-й",
+        "third" : "3-й",
+        "second": "2-й",
+        "first": "1-й",
+        "small": "Уменьшеный",
+        "full": "Полный",
+        "full_dir" : "Полный (прям)"
     },
     "2c3": {
         "single1" : "Single 1",
@@ -31,12 +37,25 @@ $(document).ready(function(){
 
     $('#ammo-type').ready(function () {
         let cannonType = $('#cannon-type').val();
-        loadAmmoType(cannonType);
+        let ammoTypes = loadAmmoType(cannonType);
+        let ammoName = ammoTypes[0];
+        let minMax = uploadMinMaxRange(cannonType, ammoName);
+        setMinMaxRange(minMax);
     });
 
     $('#cannon-type').change(function () {
         let cannonType = $(this).val();
-        loadAmmoType(cannonType);
+        let ammoTypes = loadAmmoType(cannonType);
+        let ammoName = ammoTypes[0];
+        let minMax = uploadMinMaxRange(cannonType, ammoName);
+        setMinMaxRange(minMax);
+    });
+
+    $('#ammo-type').change(function () {
+        let cannonType = $('#cannon-type').val();
+        let ammoName = $(this).val();
+        let minMax = uploadMinMaxRange(cannonType, ammoName);
+        setMinMaxRange(minMax);
     });
 
     $('#close-alert').click(function(){
@@ -64,6 +83,21 @@ $(document).ready(function(){
     });
 
 });
+
+function setMinMaxRange(minMaxArray) {
+    if (minMaxArray) {
+        $('#min-ammo-range').val(minMaxArray[0]);
+        $('#max-ammo-range').val(minMaxArray[1]);
+    } else {
+        return false;
+    }
+}
+
+function uploadMinMaxRange(cannon_type, ammo_name) {
+    let ranges = getCannonTableArray(cannon_type, ammo_name);
+    let minMaxArray = getMinMaxRange(ranges);
+    return minMaxArray;
+}
 
 function closeAlert() {
     $('#error-text').empty();
@@ -106,15 +140,19 @@ function displayError(text){
 function loadAmmoType(cannonType) {
 
     let ammo = ammoType[cannonType];
+    let ammoValues = [];
     let object = $('#ammo-type');
     object.empty();
     if (ammo){
         for (let item in ammo)
         {
+            ammoValues.push(item);
             let option = '<option value="' + item + '">' + ammo[item] + '</option>';
             object.append(option);
         }
     }
+
+    return ammoValues;
 }
 
 //Рассчитывает прицел
