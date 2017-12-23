@@ -20,6 +20,9 @@ let ammoType = {
         "single1" : "Single 1",
         "single2" : "Single 2",
         "single3" : "Single 3",
+    },
+    "bm21": {
+        "close": "Close"
     }
 };
 
