@@ -207,7 +207,11 @@ function calculateScope() {
     $('#pressure-correction').val(pressure_correction);
 
     //Считаем прицел с учётом поправки на высоты
-    let result = scope + Math.round((target_height - cannon_height) / 100 * height_correction);
+    let result = 0;
+    if (cannon_type === "d30")
+        result = scope - Math.round((target_height - cannon_height) / 100 * height_correction);
+    else
+        result = scope + Math.round((target_height - cannon_height) / 100 * height_correction);
     //Считаем прицел с учётом поправки на температуру
     result += Math.round((15 - temperature) * temp_correction);
     //Считаем прицел с учётом поправки на давление
